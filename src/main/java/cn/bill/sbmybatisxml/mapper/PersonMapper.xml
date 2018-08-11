@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:命名空间，其值为对应Dao的具体路径 -->
+<mapper namespace="cn.bill.sbmybatisxml.mapper.PersonMapper">
+
+	<resultMap type="cn.bill.sbmybatisxml.entity.Person" id="PersonEntity">
+		<!-- 
+			property：代表实体类的属性名
+			javaType:代表实体类中属性名的类型
+			column：数据库中查询语句的字段名
+			jdbcType：数据库中查询语句的字段名的类型（可不填）
+		 -->
+		<result property="name" javaType="String" column="name"/>
+		<result property="idCardNo" javaType="String" column="id_card_no"/>
+		<result property="phoneNo" javaType="String" column="phone_no"/>
+		<result property="age" javaType="Integer" column="age"/>
+		<result property="email" javaType="String" column="email"/>
+		
+		<result property="id" javaType="String" column="id"/>
+		<result property="createTime" javaType="String" column="create_time"/>
+		<result property="createBy" javaType="String" column="create_by"/>
+		<result property="updateTime" javaType="String" column="update_time"/>
+		<result property="updateBy" javaType="String" column="update_by"/>
+	</resultMap>
+	
+	<!-- 根据Id查询Person -->
+	<select id="queryById" parameterType="String" resultMap="PersonEntity">
+		select * from person where id=#{id}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="cn.bill.sbmybatisxml.entity.Person">
+		INSERT INTO `person` (`id`, `name`, `id_card_no`, `phone_no`, `age`, `email`, `create_by`, `create_time`, `update_by`, `update_time`) 
+		VALUES (#{id}, #{name}, #{idCardNo}, #{phoneNo}, #{age}, #{email}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime});
+	</insert>
+
+	<!-- 更新 -->
+	<insert id="update" parameterType="cn.bill.sbmybatisxml.entity.Person">
+		update person 
+		<set>
+			<if test="@Ognl@isNotEmpty(name)">
+				name=#{name},
+			</if>
+			<if test="@Ognl@isNotEmpty(idCardNo)">
+				id_card_no=#{idCardNo},
+			</if>
+			<if test="@Ognl@isNotEmpty(phoneNo)">
+				phone_no=#{phoneNo},
+			</if>
+			<if test="@Ognl@isNotEmpty(age)">
+				age=#{age},
+			</if>
+			<if test="@Ognl@isNotEmpty(email)">
+				email=#{email},
+			</if>
+			<if test="@Ognl@isNotEmpty(createBy)">
+				create_by=#{createBy},
+			</if>
+			<if test="@Ognl@isNotEmpty(createTime)">
+				create_time=#{createTime},
+			</if>
+			<if test="@Ognl@isNotEmpty(updateBy)">
+				update_by=#{updateBy},
+			</if>
+			<if test="@Ognl@isNotEmpty(updateTime)">
+				update_time=#{updateTime},
+			</if>
+		</set>
+		where id=#{id}
+	</insert>
+
+</mapper>

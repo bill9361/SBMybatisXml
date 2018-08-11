@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Person</title>
+</head>
+<body>
+<p><a href="/person/queryById.do?id=01b01f75-a39b-45fd-8d91-fed3b3a37108">查看人员信息</a></p>
+<#if person??>
+	<#if person.id??><p>ID：${person.id}</p></#if>
+	<#if person.name??><p>Name：${person.name}</p></#if>
+	<#if person.idCardNo??><p>IdCardNo：${person.idCardNo}</p></#if>
+	<#if person.phoneNo??><p>PhoneNo：${person.phoneNo}</p></#if>
+	<#if person.age??><p>Age：${person.age}</p></#if>
+	<#if person.email??><p>Email：${person.email}</p></#if>
+</#if>
+<hr>
+<p>人员信息：</p>
+<form action="/person/addOrUpdate.do" method="post">
+	<p><input type="hidden" name="id" value="<#if person??><#if person.id??>${person.id}</#if></#if>"/></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<input type="text" name="name" value="<#if person??><#if person.name??>${person.name}</#if></#if>"/></p>
+	<p>IdCardNo:<input type="text" name="idCardNo" value="<#if person??><#if person.idCardNo??>${person.idCardNo}</#if></#if>"/></p>
+	<p>&nbsp;phoneNo:<input type="text" name="phoneNo" value="<#if person??><#if person.phoneNo??>${person.phoneNo}</#if></#if>"/></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age:<input type="text" name="age" value="<#if person??><#if person.age??>${person.age}</#if></#if>"/></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:<input type="text" name="email" value="<#if person??><#if person.email??>${person.email}</#if></#if>"/></p>
+	<p><input type="submit" value="添加或更新"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置"/></p>
+</form>
+
+<#-- 添加或更新结果信息 -->
+<#if addOrUpdateMessage??>
+	<p>${addOrUpdateMessage}</p>
+</#if>
+
+</body>
+</html>
